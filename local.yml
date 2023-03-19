@@ -33,6 +33,7 @@
       - procs
       - dog
       - python-pip
+      - python-setuptools
       - docker
       - k9s
       - vault
