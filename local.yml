@@ -1,0 +1,96 @@
+---
+- hosts: localhost
+  connection: local
+
+
+  tasks:
+  - name: update package indexes
+    become: true
+    community.general.pacman:
+      update_cache: true
+      upgrade: true
+
+  - name: install packages
+    become: true
+    community.general.pacman:
+      state: present
+      name:
+      - bspwm
+      - sxhkd
+      - neofetch
+      - ranger
+      - kubectl
+      - kubectx
+      - gping
+      - lsd
+      - duf
+      - ripgrep
+      - picom
+      - bat
+      - fzf
+      - jq
+      - tldr
+      - procs
+      - dog
+      - python-pip
+      - docker
+      - k9s
+      - vault
+      - consul
+      - make
+      - neovim
+      - alacritty
+      - xdotool
+
+  - name: install python packages
+    ansible.builtin.pip:
+      state: present
+      name:
+        - pytest
+        - pyyaml
+        - scrapy
+        - black
+
+  # Setup Bspwm
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm755 files/.config/bspwm/bspwmrc ~/.config/bspwm/bspwmrc"
+
+  # Setup sxhkd
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/sxhkd/sxhkdrc  ~/.config/bspwm/sxhkdrc"
+
+  # Setup Ranger
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/ranger/rc.conf ~/.config/ranger/rc.conf"
+
+  # # Setup K9s
+  # - name:
+  #   ansible.builtin.shell:
+  #     cmd: "install -Dm644 files/.config/k9s/* ~/.config/ranger/*"
+
+  # # Setup Polybar
+  # - name:
+  #   ansible.builtin.shell:
+  #     cmd: "install -Dm644 files/.config/polybar/* ~/.config/polybar/*"
+
+  # Setup Alacritty
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml"
+
+  # Setup X files
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.xinitrc ~/.xinitrc"
+
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.Xresources ~/.Xresources"
+
+  # Setup Picom
+  - name:
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/picom.conf ~/.config/picom.conf"
