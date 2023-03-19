@@ -60,7 +60,7 @@
   # Setup sxhkd
   - name:
     ansible.builtin.shell:
-      cmd: "install -Dm644 files/.config/sxhkd/sxhkdrc  ~/.config/bspwm/sxhkdrc"
+      cmd: "install -Dm644 files/.config/sxhkd/sxhkdrc  ~/.config/sxhkd/sxhkdrc"
 
   # Setup Ranger
   - name:
