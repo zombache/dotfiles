@@ -1,5 +1,11 @@
 #! /bin/sh
 
+xrdb .Xresources &
+picom &
+polybar -r top &
+polybar -r bottom &
+feh --bg-fill ~/Pictures/wallpaper.jpg &
+
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc monitor -d I II III IV V VI VII VIII IX X

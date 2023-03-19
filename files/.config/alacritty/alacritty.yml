@@ -1,9 +1,8 @@
 colors:
   # Default colors
   primary:
-    background: '0x2D2A2E'
+    background: '0x101010'
     foreground: '0xfff1f3'
-
   # Normal colors
   normal:
     black:   '0x2c2525'
@@ -14,7 +13,6 @@ colors:
     magenta: '0xa8a9eb'
     cyan:    '0x85dacc'
     white:   '0xfff1f3'
-
   # Bright colors
   bright:
     black:   '0x72696a'
@@ -25,3 +23,32 @@ colors:
     magenta: '0xa8a9eb'
     cyan:    '0x85dacc'
     white:   '0xfff1f3'
+
+font:
+  # Normal font face
+  normal:
+    family: Mononoki Nerd Font
+    style: Regular
+  # Bold font face
+  bold:
+    family: Mononoki Nerd Font
+    style: Bold
+  # Italic font face
+  italic:
+    family: Mononoki Nerd Font
+    style: Italic
+  # Bold italic font face
+  bold_italic:
+    family: Mononoki Nerd Font
+    style: Bold Italic
+  size: 11
+
+cursor:
+  style:
+    shape: Underline
+    blinking: Always
+  blink_interval: 500
+  blink_timeout: 0
+
+scrolling:
+  history: 20000

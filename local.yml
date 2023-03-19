@@ -8,7 +8,6 @@
     become: true
     community.general.pacman:
       update_cache: true
-      upgrade: true
 
   - name: install packages
     become: true
@@ -42,6 +41,16 @@
       - neovim
       - alacritty
       - xdotool
+      - polybar
+      - ttf-mononoki-nerd
+      - feh
+      - lxappearance-gtk3
+      - papirus-icon-theme
+      - arc-gtk-theme-eos
+      - lazygit
+      - aws-cli-v2
+      - helm
+      - xclip
 
   - name: install python packages
     ansible.builtin.pip:
@@ -53,17 +62,17 @@
         - black
 
   # Setup Bspwm
-  - name:
+  - name: install bspwm config
     ansible.builtin.shell:
       cmd: "install -Dm755 files/.config/bspwm/bspwmrc ~/.config/bspwm/bspwmrc"
 
   # Setup sxhkd
-  - name:
+  - name: install sxhkd config
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.config/sxhkd/sxhkdrc  ~/.config/sxhkd/sxhkdrc"
 
   # Setup Ranger
-  - name:
+  - name: install ranger config
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.config/ranger/rc.conf ~/.config/ranger/rc.conf"
 
@@ -72,26 +81,44 @@
   #   ansible.builtin.shell:
   #     cmd: "install -Dm644 files/.config/k9s/* ~/.config/ranger/*"
 
-  # # Setup Polybar
-  # - name:
-  #   ansible.builtin.shell:
-  #     cmd: "install -Dm644 files/.config/polybar/* ~/.config/polybar/*"
+  # Setup Polybar
+  - name: install polybar config
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/polybar/config.ini ~/.config/polybar/config.ini"
 
   # Setup Alacritty
-  - name:
+  - name: install alacritty config
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml"
 
   # Setup X files
-  - name:
+  - name: install xinitrc
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.xinitrc ~/.xinitrc"
 
-  - name:
+  - name: install xresources
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.Xresources ~/.Xresources"
 
   # Setup Picom
-  - name:
+  - name: install picom config
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.config/picom.conf ~/.config/picom.conf"
+
+  # Install k3d
+  - name: install k3d
+    become: true
+    ansible.builtin.shell:
+      cmd: "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash"
+
+  # Docker post install
+  - name: enable docker service
+    become: true
+    ansible.builtin.systemd:
+      name: docker.service
+      enabled: true
+      state: started
+  - name: add user to docker group
+    become: true
+    ansible.builtin.shell:
+      cmd: "usermod -aG docker $USER"
