@@ -81,6 +81,11 @@
     ansible.builtin.shell:
       cmd: "install -Dm644 files/.config/ranger/rc.conf ~/.config/ranger/rc.conf"
 
+  - name: install dunst config
+    ansible.builtin.shell:
+      cmd: "install -Dm644 files/.config/dunst/dunstrc ~/.config/dunst/dunstrc"
+
+
   # # Setup K9s
   # - name:
   #   ansible.builtin.shell:
