@@ -51,6 +51,10 @@
       - aws-cli-v2
       - helm
       - xclip
+      - fish
+      - fisher
+      - rofi
+      - docker-compose
 
   - name: install python packages
     ansible.builtin.pip:
@@ -121,4 +125,18 @@
   - name: add user to docker group
     become: true
     ansible.builtin.shell:
-      cmd: "usermod -aG docker $USER"
+      cmd: "usermod -aG docker ops"
+
+  # Install Terraform
+  - name: download terraform
+    become: true
+    ansible.builtin.get_url:
+      url: "https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip"
+      dest: /tmp/terraform.zip
+      checksum: sha256:a73459d406067ce40a46f026dce610740d368c3b4a3d96591b10c7a577984c2e
+  - name: install terraform
+    become: true
+    ansible.builtin.unarchive:
+      src: /tmp/terraform.zip
+      dest: /usr/local/bin
+      mode: 0755
