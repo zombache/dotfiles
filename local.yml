@@ -55,6 +55,7 @@
       - fisher
       - rofi
       - docker-compose
+      - dunst
 
   - name: install python packages
     ansible.builtin.pip:

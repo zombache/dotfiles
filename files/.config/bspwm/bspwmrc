@@ -2,6 +2,7 @@
 
 xrdb .Xresources &
 picom &
+dunst &
 polybar -r top &
 polybar -r bottom &
 feh --bg-fill ~/Pictures/wallpaper.jpg &
